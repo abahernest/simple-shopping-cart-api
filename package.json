@@ -1,0 +1,61 @@
+{
+  "name": "technical-assignment-back-end-engineer-abahernest",
+  "version": "1.0.0",
+  "description": "As part of an engineering team, you are working on an online shopping platform. The sales team wants to know which items were added to a basket, but removed before checkout. They will use this data later for targeted discounts.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "NODE_ENV=test jest",
+    "sequelize-cli:es6": "./node_modules/.bin/babel-node ./node_modules/.bin/sequelize",
+    "db:migrate": "npm run sequelize-cli:es6 db:migrate",
+    "dev": "NODE_ENV=development npm run db:migrate && nodemon server.js",
+    "start": "NODE_ENV=production npm run db:migrate node server.js",
+    "prepare": "husky install",
+    "scriptname": "cmd",
+    "lint": "npx eslint ./ --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madewithlove/technical-assignment-back-end-engineer-abahernest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/madewithlove/technical-assignment-back-end-engineer-abahernest/issues"
+  },
+  "homepage": "https://github.com/madewithlove/technical-assignment-back-end-engineer-abahernest#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-latest-node": "^0.4.0",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.2",
+    "pg-native": "^3.0.0",
+    "sequelize": "^6.21.4",
+    "sequelize-cli": "^6.4.1",
+    "winston": "^3.8.1",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^29.0.2",
+    "babel-plugin-transform-import-meta": "^2.2.0",
+    "babel-register": "^6.26.0",
+    "eslint": "^8.23.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^27.0.2",
+    "eslint-plugin-n": "^15.2.5",
+    "eslint-plugin-promise": "^6.0.1",
+    "husky": "^8.0.1",
+    "jest": "^29.0.2",
+    "nodemon": "^2.0.19",
+    "supertest": "^6.2.4"
+  }
+}

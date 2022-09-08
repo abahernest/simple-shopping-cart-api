@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  db: postgres:12-alpine
+    restart: always
+    networks:
+      - webnet
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-postgres}
+
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    restart: always
+    networks:
+      - webnet
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+    environment:
+      DB_NAME: ${DB_NAME:-postgres}
+      DB_HOST: db
+    command: ["npm", "start"]
+
+networks:
+  webnet
+

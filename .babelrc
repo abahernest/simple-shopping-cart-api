@@ -1,0 +1,9 @@
+{
+  "presets": [
+    ["latest-node", { "target": "current" }]
+  ],
+  "plugins": [
+    // "babel-plugin-transform-import-meta",
+    ["transform-class-properties", { "spec": true },]
+  ]
+}
