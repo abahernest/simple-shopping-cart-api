@@ -11,3 +11,7 @@ Using the agreed upon programming language, build a solution that solves the abo
 **Timing**
 
 You have one week to accomplish the assignment. You decide yourself how much time and effort you invest in it, but one of our colleagues tends to say: "Make sure it is good" ;-). Please send us an email (jobs@madewithlove.com) when you think the assignment is ready for review. Please mention your name, Github username, and a link to what we need to review.
+
+STEPS
+1. Prepare the DB. This migrates the database and seeds default data
+    `npm run prepare:db`

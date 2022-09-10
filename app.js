@@ -1,7 +1,7 @@
 import express from 'express'
 
 // Import router
-// import routes from "./routes/routes";
+import routes from './api/routes/index.js'
 
 const app = express()
 
@@ -16,17 +16,15 @@ app.all('/*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header(
     'Access-Control-Allow-Headers',
-    `Origin, Accept, X-Requested-With, 
-    Content-Type, Access-Control-Request-Method, 
-    Access-Control-Request-Headers, X-Access-Token, 
-    XKey, Authorization, Observe`
+    // eslint-disable-next-line max-len
+    'Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, X-Access-Token, XKey, Authorization, Observe'
   )
   res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, PATCH, DELETE')
   next()
 })
 
 /** Routes */
-// app.use("/api/v1/", routes);
+app.use('/api/v1/', routes)
 
 /** Error handling */
 app.use((req, res) => res.status(404).json({

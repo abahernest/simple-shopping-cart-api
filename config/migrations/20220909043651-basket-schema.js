@@ -3,25 +3,28 @@ import logger from 'winston'
 export default {
   up (queryInterface, Sequelize) {
     return queryInterface
-      .createTable('Products', {
+      .createTable('Baskets', {
         id: {
           allowNull: false,
+          autoIncrement: true,
           primaryKey: true,
           type: Sequelize.INTEGER,
-          autoIncrement: true,
         },
-        amount: {
-          type: Sequelize.DOUBLE,
+        userId: {
           allowNull: false,
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'Users',
+            key: 'id',
+          },
         },
-        name: {
-          type: Sequelize.STRING,
+        productId: {
           allowNull: false,
-          unique: true,
-        },
-        description: {
-          type: Sequelize.STRING,
-          allowNull: true,
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'Products',
+            key: 'id',
+          },
         },
         createdAt: {
           allowNull: false,
@@ -37,7 +40,7 @@ export default {
 
   down (queryInterface) {
     return queryInterface
-      .dropTable('Products')
+      .dropTable('Baskets')
       .catch((error) => logger.error(error))
   },
 }

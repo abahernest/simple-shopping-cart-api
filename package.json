@@ -8,8 +8,10 @@
     "test": "NODE_ENV=test jest",
     "sequelize-cli:es6": "./node_modules/.bin/babel-node ./node_modules/.bin/sequelize",
     "db:migrate": "npm run sequelize-cli:es6 db:migrate",
+    "db:seed:all": "npm run sequelize-cli:es6 db:seed:all",
+    "prepare:db": "npm run db:migrate && npm run db:seed:all",
     "dev": "NODE_ENV=development npm run db:migrate && nodemon server.js",
-    "start": "NODE_ENV=production npm run db:migrate node server.js",
+    "start": "NODE_ENV=production npm run db:migrate && node server.js",
     "prepare": "husky install",
     "scriptname": "cmd",
     "lint": "npx eslint ./ --fix"
@@ -38,6 +40,7 @@
     "pg-native": "^3.0.0",
     "sequelize": "^6.21.4",
     "sequelize-cli": "^6.4.1",
+    "validatorjs": "^3.22.1",
     "winston": "^3.8.1",
     "yup": "^0.32.11"
   },
