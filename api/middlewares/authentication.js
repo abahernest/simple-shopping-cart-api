@@ -1,4 +1,3 @@
-import { tokenVerifier } from '../helpers/jwtHelper.js'
 import User from '../models/user.model.js'
 
 const isAuth = async (req, res, next) => {
@@ -8,7 +7,7 @@ const isAuth = async (req, res, next) => {
     const token = authHeader.split(' ')[1]
 
     try {
-      const decodedToken = await tokenVerifier(token)
+      const decodedToken = User.verifyAuthToken(token)
       if (!decodedToken.id) {
         return res.status(401).json({
           code: 401,

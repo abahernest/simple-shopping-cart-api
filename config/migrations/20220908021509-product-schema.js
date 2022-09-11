@@ -21,7 +21,7 @@ export default {
         },
         description: {
           type: Sequelize.STRING,
-          allowNull: true,
+          defaultValue: '',
         },
         createdAt: {
           allowNull: false,

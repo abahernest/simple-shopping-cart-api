@@ -17,6 +17,7 @@ export default {
             model: 'Products',
             key: 'id',
           },
+          unique: true
         },
         timesPurchased: {
           defaultValue: 0,

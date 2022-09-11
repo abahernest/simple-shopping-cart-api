@@ -8,7 +8,6 @@ import logger from '../../config/logger.js'
  * @class Product
  * @extends {Model}
  */
-
 export default class Product extends Model {
   static modelFields = {
     name: {
@@ -38,7 +37,7 @@ export default class Product extends Model {
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: true,
+      defaultValue: '',
     },
   }
 
@@ -79,10 +78,20 @@ export default class Product extends Model {
 
     Product.belongsToMany(User, {
       through: Basket,
-      foreignKey: 'productId',
+      foreignKey: 'productId'
     })
   }
 
+  /**
+   * Product model hooks
+   *
+   * @static
+   * @memberof Product
+   *
+   * @param {any} models All models in the app
+   *
+   * @returns {null} no return
+   */
   static async hooks (models) {
     const { ProductInsights } = models
     await Product.addHook('afterCreate', async (product, options) => {
@@ -96,13 +105,7 @@ export default class Product extends Model {
     })
     await Product.addHook('afterBulkCreate', async (products, options) => {
       try {
-        // console.log(products)
-        // products.forEach(async (product)=>{
-        //     await ProductInsights.create({
-        //         productId: product.id,
-        //     });
-        // })
-        const productIds = products.map(product => {
+        const productIds = products.map((product) => {
           return { productId: product.id }
         })
         await ProductInsights.bulkCreate(productIds)

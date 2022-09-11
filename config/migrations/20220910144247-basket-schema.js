@@ -10,6 +10,13 @@ export default {
           primaryKey: true,
           type: Sequelize.INTEGER,
         },
+        purchased: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: false,
+        },
+        datePurchased: {
+          type: Sequelize.DATE,
+        },
         userId: {
           allowNull: false,
           type: Sequelize.INTEGER,

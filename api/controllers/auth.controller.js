@@ -1,37 +1,27 @@
 // model
-import User from '../models/user.model.js'
-import { hash, verifyHash, generateJwtToken } from '../helpers/jwtHelper.js'
+import database from '../models/index.js'
 
+const { User } = database
+
+/**
+ * User Signup
+ *
+ * @param {any} data - javascript object
+ * @returns {any} - {code, status, error, message, data}
+ */
 export async function Signup (data) {
   try {
     // Check that user email is unique
-    let user = await User.where({ email: data.email })
+    const user = await User.create(data)
 
-    if (user.length >= 1) {
-      return {
-        code: 400,
-        status: 'failed',
-        error: true,
-        message: 'email already exists',
-      }
-    }
-    // hash password
-    data.password = await hash(data.password.toString())
-
-    // generate jwt
-    const token = await generateJwtToken(data)
-
-    // create user
-    user = await User.create(data)
+    const token = user.generateJWToken()
 
     return {
       code: 200,
       status: 'success',
       error: false,
-      message: 'Successful',
       data: {
-        token,
-        user,
+        token
       },
     }
   } catch (e) {
@@ -39,15 +29,22 @@ export async function Signup (data) {
       code: 500,
       status: 'failed',
       error: true,
-      message: 'something went wrong, could not signup',
+      message: e.message,
     }
   }
 }
 
+/**
+ * User Login
+ *
+ * @static
+ * @param {any} data - object
+ * @returns {object} - {code, status, error, message, data}
+ */
 export async function Login (data) {
   try {
     // Check that user email exists
-    const user = User.findOne({
+    const user = await User.findOne({
       where: { email: data.email }
     })
 
@@ -59,12 +56,8 @@ export async function Login (data) {
         message: 'wrong credentials',
       }
     }
-    // validate password
-    const isValidPassword = await verifyHash(
-      data.password.toString(),
-      user.password
-    )
 
+    const isValidPassword = user.comparePassword(data.password)
     if (!isValidPassword) {
       return {
         code: 400,
@@ -73,15 +66,13 @@ export async function Login (data) {
         message: 'wrong credentials',
       }
     }
-    // generate jwt
-    const token = await generateJwtToken(user)
 
-    delete user.password
+    const token = user.generateJWToken()
+
     return {
       code: 200,
       status: 'success',
       error: false,
-      message: 'Successful',
       data: {
         token,
         user,
@@ -92,7 +83,7 @@ export async function Login (data) {
       code: 500,
       status: 'failed',
       error: true,
-      message: 'something went wrong, could not login',
+      message: e.message,
     }
   }
 }

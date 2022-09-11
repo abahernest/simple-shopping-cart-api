@@ -10,7 +10,7 @@
     "db:migrate": "npm run sequelize-cli:es6 db:migrate",
     "db:seed:all": "npm run sequelize-cli:es6 db:seed:all",
     "prepare:db": "npm run db:migrate && npm run db:seed:all",
-    "dev": "NODE_ENV=development npm run db:migrate && nodemon server.js",
+    "dev": "NODE_ENV=development npm run db:migrate && npm run db:seed:all && nodemon server.js",
     "start": "NODE_ENV=production npm run db:migrate && node server.js",
     "prepare": "husky install",
     "scriptname": "cmd",

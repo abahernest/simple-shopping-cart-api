@@ -7,7 +7,6 @@ import { DataTypes, Model } from 'sequelize'
  * @class ProductInsights
  * @extends {Model}
  */
-
 export default class ProductInsights extends Model {
   static modelFields = {
     timesPurchased: {
@@ -48,13 +47,46 @@ export default class ProductInsights extends Model {
    * @static
    * @memberof ProductInsights
    *
-   * @param {any} sequelize The sequelize object
+   * @param {any} sequelize - The sequelize object
    *
-   * @returns {objct} the Product model
+   * @returns {objct} - the Product model
    */
   static init (sequelize) {
     const model = super.init(ProductInsights.modelFields, { sequelize })
     return model
+  }
+
+  /**
+   * Increment TimesPurchased
+   *
+   * @memberof ProductInsights
+   * @param   {null} null - null
+   * @returns {null} - no return
+   */
+  async incrementTimesPurchased () {
+    await this.increment('timesPurchased')
+  }
+
+  /**
+   * Increment TimesRemovedFromBasket
+   *
+   * @memberof ProductInsights
+   * @param   {null} null - null
+   * @returns {null} - no return
+   */
+  async incrementTimesRemovedFromBasket () {
+    await this.increment('timesRemovedFromBasket')
+  }
+
+  /**
+   * Increment TimesAddedToBasket
+   *
+   * @memberof ProductInsights
+   * @param   {null} null - null
+   * @returns {null} - no return
+   */
+  async incrementTimesAddedToBasket () {
+    await this.increment('timesAddedToBasket')
   }
 
   /**
@@ -63,13 +95,13 @@ export default class ProductInsights extends Model {
    * @static
    * @memberof ProductInsights
    *
-   * @param {any} models All models in the app
+   * @param {any} models - All models in the app
    *
-   * @returns {null} no return
+   * @returns {null} - no return
    */
   static associate (models) {
     const { Product } = models
 
-    ProductInsights.belongsTo(Product)
+    ProductInsights.belongsTo(Product, { foreignKey: 'productId' })
   }
 }

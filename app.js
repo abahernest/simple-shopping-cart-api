@@ -24,7 +24,7 @@ app.all('/*', (req, res, next) => {
 })
 
 /** Routes */
-app.use('/api/v1/', routes)
+app.use('/api/v1', routes)
 
 /** Error handling */
 app.use((req, res) => res.status(404).json({

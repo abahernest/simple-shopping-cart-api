@@ -19,7 +19,7 @@ process.on('unhandledRejection', (err) => {
   // eslint-disable-next-line no-console
   logger.error('UNHANDLED REJECTION! 💥 Shutting down...')
   // eslint-disable-next-line no-console
-  logger.error(err)
+  console.log(err)
   //   console.log(err.name, err.message);
   process.exit(1)
 })
