@@ -1,6 +1,8 @@
 version: "3.9"
 services:
-  db: postgres:12-alpine
+  db:
+    build:
+      context: db_dockerfile
     restart: always
     networks:
       - webnet
@@ -8,11 +10,12 @@ services:
       POSTGRES_USER: ${DB_USER:-postgres}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
       POSTGRES_DB: ${DB_NAME:-postgres}
+      POSTGRES_MULTIPLE_DATABASES: ${DB_MULTIPLE_DATABASES:-postgres_test}
 
   app:
     build: .
     ports:
-      - "5000:5000"
+      - "4000:4000"
     restart: always
     networks:
       - webnet
@@ -23,8 +26,12 @@ services:
     environment:
       DB_NAME: ${DB_NAME:-postgres}
       DB_HOST: db
+      TEST_DB: ${TEST_DB:-postgres_test}
+      DB_USER: ${DB_USER:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      JWT_SECRET: ${JWT_SECRET:-mysupersecretjwtkey}
     command: ["npm", "start"]
 
 networks:
-  webnet
+  webnet:
 

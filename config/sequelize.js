@@ -27,11 +27,11 @@ const config = {
   seederStorageTableName: 'SequelizeSeeders'
 }
 
-if (!devMode) {
-  config.ssl = true
-  config.dialectOptions.ssl = {
-    require: true
-  }
-}
+// if (!devMode) {
+//   config.ssl = true
+//   config.dialectOptions.ssl = {
+//     require: true
+//   }
+// }
 
 export default config
