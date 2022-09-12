@@ -24,3 +24,5 @@ IF DOCKER COMPOSE ISNT INSTALLED
 4. Run `npm run dev` to start application. (This runs migration and seeds data)
 
 5. Run `npm test` to run tests
+
+[Postman Documentation](https://documenter.getpostman.com/view/11044390/2s7YYr74WP)
