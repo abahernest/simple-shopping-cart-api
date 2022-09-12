@@ -33,12 +33,17 @@ export function sendError (res, err) {
 }
 
 // Custom validator to verify phoneNo
-Validator.register('containsInteger', function (value, requirement, attribute) {
-  return value.every((item) => {
-    if (typeof (item) === 'number') {
-      return true
-    } else {
-      return false
-    }
-  })
-}, 'The :attribute must contain integer')
+Validator.registerAsync('containsInteger', function (value, requirement, attribute, passes) {
+  if (!Array.isArray(value)) {
+    passes(false, 'The productIds must be an array.')
+  } else {
+    const containsInteger = value.every((item) => {
+      if (typeof item === 'number') {
+        return true
+      } else {
+        return false
+      }
+    })
+    if (!containsInteger) { passes(false, 'The productIds must contain integer.') } else { passes() }
+  }
+})

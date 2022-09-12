@@ -13,7 +13,7 @@ export function validateSignup (req, res, next) {
     email: 'required|string|email',
     firstname: 'required|string',
     lastname: 'required|string',
-    password: 'required|string'
+    password: 'required|string|min:8'
   }
   validator(req.body, validationRule, {}, (err, status) => {
     if (!status) {
@@ -35,7 +35,7 @@ export function validateSignup (req, res, next) {
 export function validateLogin (req, res, next) {
   const validationRule = {
     email: 'required|string|email',
-    password: 'required|string',
+    password: 'required|string|min:8',
   }
 
   validator(req.body, validationRule, {}, (err, status) => {

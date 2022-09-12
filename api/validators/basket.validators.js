@@ -10,7 +10,7 @@ import { validator, sendError } from './index.js'
  */
 export function validateAddToBasket (req, res, next) {
   const validationRule = {
-    productId: 'required|numeric',
+    productId: 'required|integer',
   }
   validator(req.body, validationRule, {}, (err, status) => {
     if (!status) {
@@ -31,7 +31,7 @@ export function validateAddToBasket (req, res, next) {
  */
 export function validateProductPurchase (req, res, next) {
   const validationRule = {
-    productIds: 'required|array|containsInteger',
+    productIds: 'required|containsInteger',
   }
   validator(req.body, validationRule, {}, (err, status) => {
     if (!status) {
@@ -52,7 +52,7 @@ export function validateProductPurchase (req, res, next) {
  */
 export function validateRemoveFromBasket (req, res, next) {
   const validationRule = {
-    productIds: 'required|array|containsInteger',
+    productIds: 'required|containsInteger',
   }
   validator(req.body, validationRule, {}, (err, status) => {
     if (!status) {

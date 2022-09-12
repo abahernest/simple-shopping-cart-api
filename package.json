@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "NODE_ENV=test jest",
+    "test": "NODE_ENV=test jest --verbose -- test/init.spec.js",
     "sequelize-cli:es6": "./node_modules/.bin/babel-node ./node_modules/.bin/sequelize",
     "db:migrate": "npm run sequelize-cli:es6 db:migrate",
     "db:seed:all": "npm run sequelize-cli:es6 db:seed:all",
